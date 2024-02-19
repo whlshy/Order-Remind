@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Box, TextField, Tooltip, Typography } from '@mui/material'
+import Text2Speech from '../../elements/Text2Speech'
 
 const width = 500
 
 export default function index() {
   const [value, setValue] = useState('')
+  const [last_value, setLastValue] = useState(null)
   const [list, setList] = useState([])
 
   const addList = (str) => {
@@ -13,12 +15,14 @@ export default function index() {
       setList(list.filter(f => f !== str))
     } else {
       setList([...list, str])
+      setLastValue(str)
     }
     setValue('')
   }
 
   return (
     <Box sx={{ p: 2, backgroundColor: "#7B1513", color: "#fff", flex: "1 1 auto", display: "flex" }}>
+      <Text2Speech text={last_value !== null ? `請${last_value}號顧客取餐` : null} />
       <Box className="flex-1-1 flex flex-col">
         <Box sx={{ height: "35%" }}>
         </Box>
@@ -33,7 +37,7 @@ export default function index() {
             <Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(120px, 1fr))" }}>
               {
                 list?.map(d =>
-                  <Tooltip title="點擊完成訂單">
+                  <Tooltip title="點擊完成訂單" key={d}>
                     <Typography
                       variant='span'
                       sx={{
