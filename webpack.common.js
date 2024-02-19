@@ -19,7 +19,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: title,
       template: "src/index.html", // to import index.html file inside index.js
-      inject: true,
+      inject: "body",
+      filename: "index.html",
     }),
     new CopyPlugin({
       patterns: [{ from: 'src/public', to: path.resolve(__dirname, "dist/"), noErrorOnMissing: true }]
