@@ -22,6 +22,8 @@ export default function Text2Speech({ text }) {
         u_new.rate = 0.6
         u_new.lang = "zh-TW"
         u_new.volume = 1
+        let voices = window.speechSynthesis.getVoices();
+        u_new.voice = voices.filter(function(voice) { return voice.lang == 'zh-TW'; })[0];
 
         if (isPaused) {
             synth.resume();
