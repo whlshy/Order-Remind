@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Box, TextField, Tooltip, Typography } from '@mui/material'
 import Text2Speech from '../../elements/Text2Speech'
+import useAppStore from '../../../store/app'
 
 const width = 500
 
 export default function index() {
+  const { list, setList } = useAppStore()
   const [value, setValue] = useState('')
   const [last_value, setLastValue] = useState(null)
-  const [list, setList] = useState([])
 
   const addList = (str) => {
     let idx = list.findIndex(f => f == str)

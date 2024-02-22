@@ -12,13 +12,11 @@ const Index = () => {
 
   const onError = (error, variables, context) => {
     console.log('onError', error, variables)
-    setSnackMsg({ message: "API發生未知錯誤" })
+    // setSnackMsg({ message: "API發生未知錯誤" })
   }
 
   const onSuccess = (data) => {
-    const status = (data?.body?.status !== null && data?.body?.status !== undefined) ? data?.body?.status : null
-    status !== null && setSnackMsg({ message: data?.body?.message })
-    !data?.ok && status == null && setSnackMsg({ message: "API發生未知錯誤" })
+    console.log(data)
   }
 
   const queryClient = new QueryClient({
@@ -33,11 +31,6 @@ const Index = () => {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false, // default: true
-        select: (data) => {
-          const status = (data?.body?.status !== null && data?.body?.status !== undefined) ? data?.body?.status : null
-          const response = (status == null ? (data.body || null) : null)
-          return response
-        }
       },
     },
   })

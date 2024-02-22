@@ -2,10 +2,10 @@ import axios from "axios"
 import config from "Config"
 const { apiurl, cors } = config
 
-export default function ({ cmd, method = "GET", type = "json", data = {}, header = {}, fileList = [], fileObj = {} }) {
+export default function ({ cmd, cmd_url = null, method = "GET", type = "json", data = {}, header = {}, fileList = [], fileObj = {} }) {
   method = method.toUpperCase()
   type = type.toLowerCase()
-  let url = `${apiurl}/${cmd}`
+  let url = cmd_url == null ? `${apiurl}/${cmd}` : cmd_url
   let option = {
     method,
     headers: {
